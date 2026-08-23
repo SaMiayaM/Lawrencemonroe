@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, ZoomIn, Layers, Sparkles } from 'lucide-react';
+import { Eye, ZoomIn, Sparkles, Shield, UserX } from 'lucide-react';
 import { SHORTS_001_VISUALS, SHORTS_002_VISUALS, ProductVisual } from '../../data/assets';
+import { EditorialFaceBlur } from '../common/EditorialFaceBlur';
 
 interface ProductMediaStageProps {
   productId: string;
@@ -15,6 +16,8 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
   const [focusMode, setFocusMode] = useState<'full' | 'shorts'>('full');
   const [showAnnotations, setShowAnnotations] = useState(false);
   const [activeAnnotationId, setActiveAnnotationId] = useState<number | null>(null);
+  const [faceBlurActive, setFaceBlurActive] = useState(true);
+  const [blurStyle, setBlurStyle] = useState<'frosted-glass' | 'pixel-tape' | 'monogram-censor'>('frosted-glass');
   
   // Mouse position for subtle 2px-4px micro-shift
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -30,14 +33,12 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
 
   return (
     <div className="space-y-4">
-      {/* Top Inspection Controls Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border border-line bg-black/60 p-2.5 font-mono text-xs">
+      {/* Top Inspection & Focus Controls Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border border-line bg-black/70 p-2.5 font-mono text-xs">
         {/* Full Look vs Shorts Focus Mode Toggle */}
         <div className="flex items-center space-x-1 border border-line/60 bg-graphite p-0.5">
           <button
-            onClick={() => {
-              setFocusMode('full');
-            }}
+            onClick={() => setFocusMode('full')}
             className={`px-3 py-1.5 uppercase font-bold text-[11px] transition-colors ${
               focusMode === 'full'
                 ? 'bg-black text-gold border border-gold/60 shadow-sm'
@@ -47,9 +48,7 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
             FULL LOOK
           </button>
           <button
-            onClick={() => {
-              setFocusMode('shorts');
-            }}
+            onClick={() => setFocusMode('shorts')}
             className={`px-3 py-1.5 uppercase font-bold text-[11px] transition-colors flex items-center space-x-1.5 ${
               focusMode === 'shorts'
                 ? 'bg-black text-gold border border-gold/60 shadow-sm'
@@ -61,20 +60,53 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
           </button>
         </div>
 
-        {/* Inspection Annotations Toggle */}
-        {activeVisual.annotations && activeVisual.annotations.length > 0 && (
-          <button
-            onClick={() => setShowAnnotations(!showAnnotations)}
-            className={`px-3 py-1.5 uppercase font-mono text-[11px] tracking-wider transition-colors border flex items-center space-x-1.5 ${
-              showAnnotations
-                ? 'border-gold bg-gold/10 text-gold font-bold'
-                : 'border-line text-smoke hover:text-bone hover:border-smoke'
-            }`}
-          >
-            <Eye size={13} />
-            <span>{showAnnotations ? 'HIDE ANNOTATIONS' : 'INSPECTION MARKS'}</span>
-          </button>
-        )}
+        {/* Action Controls: Fun Face Blur Toggle & Inspection Annotations */}
+        <div className="flex items-center space-x-2">
+          {/* Face Blur Toggle */}
+          {focusMode === 'full' && (
+            <button
+              onClick={() => {
+                if (!faceBlurActive) {
+                  setFaceBlurActive(true);
+                } else {
+                  // Cycle blur style or toggle
+                  if (blurStyle === 'frosted-glass') setBlurStyle('pixel-tape');
+                  else if (blurStyle === 'pixel-tape') setBlurStyle('monogram-censor');
+                  else {
+                    setBlurStyle('frosted-glass');
+                    setFaceBlurActive(false);
+                  }
+                }
+              }}
+              className={`px-2.5 py-1.5 uppercase font-mono text-[10px] tracking-wider transition-colors border flex items-center space-x-1.5 ${
+                faceBlurActive
+                  ? 'border-gold bg-gold/10 text-gold font-bold'
+                  : 'border-line text-smoke hover:text-bone'
+              }`}
+              title="Toggle playful high-fashion editorial face obscurity"
+            >
+              <UserX size={12} />
+              <span>
+                {faceBlurActive ? `BLUR: ${blurStyle === 'frosted-glass' ? 'FROSTED' : blurStyle === 'pixel-tape' ? 'TAPE' : 'MONOGRAM'}` : 'BLUR: OFF'}
+              </span>
+            </button>
+          )}
+
+          {/* Inspection Annotations Toggle */}
+          {activeVisual.annotations && activeVisual.annotations.length > 0 && (
+            <button
+              onClick={() => setShowAnnotations(!showAnnotations)}
+              className={`px-3 py-1.5 uppercase font-mono text-[11px] tracking-wider transition-colors border flex items-center space-x-1.5 ${
+                showAnnotations
+                  ? 'border-gold bg-gold/10 text-gold font-bold'
+                  : 'border-line text-smoke hover:text-bone hover:border-smoke'
+              }`}
+            >
+              <Eye size={13} />
+              <span>{showAnnotations ? 'HIDE MARKS' : 'INSPECTION MARKS'}</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Main Interactive Stage with Print-Frame Border */}
@@ -100,6 +132,18 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
             }}
             className="w-full h-full object-cover filter contrast-105 brightness-95 select-none"
           />
+
+          {/* Fun Editorial Face Blur Overlay (Active in Full Look Mode) */}
+          {faceBlurActive && focusMode === 'full' && (
+            <EditorialFaceBlur
+              variant={blurStyle}
+              top={activeVisual.id.includes('seated') ? '12%' : '8%'}
+              left="50%"
+              width={activeVisual.id.includes('seated') ? '94px' : '82px'}
+              height="46px"
+              label="LM // PRIVATE RELEASE"
+            />
+          )}
 
           {/* Vignette Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none" />

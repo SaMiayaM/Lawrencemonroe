@@ -6,6 +6,7 @@ import { RELEASED_PRODUCTS } from '../../data/products';
 import { formatCurrency } from '../../utils/format';
 import { useCartStore } from '../../store/cartStore';
 import { brandAssets } from '../../data/assets';
+import { EditorialFaceBlur } from '../common/EditorialFaceBlur';
 
 export const Section4ReleasedPieces: React.FC = () => {
   const [product1Focus, setProduct1Focus] = useState<'full' | 'shorts'>('full');
@@ -91,6 +92,11 @@ export const Section4ReleasedPieces: React.FC = () => {
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full h-full object-cover filter brightness-95 contrast-105"
               />
+
+              {/* Fun Editorial Face Blur on full look view */}
+              {product1Focus === 'full' && (
+                <EditorialFaceBlur top="8%" left="50%" width="84px" height="44px" label="LM // 001" />
+              )}
 
               {/* Official White Pill Badge Stamp */}
               <div className="absolute top-4 left-4 z-20 w-32 sm:w-36">
@@ -277,6 +283,11 @@ export const Section4ReleasedPieces: React.FC = () => {
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full h-full object-cover filter brightness-95 contrast-105"
               />
+
+              {/* Fun Editorial Face Blur on full look view */}
+              {product2Focus === 'full' && (
+                <EditorialFaceBlur top="8%" left="50%" width="84px" height="44px" label="LM // 002" />
+              )}
 
               {/* Official Blue Pill Badge Stamp */}
               <div className="absolute top-4 left-4 z-20 w-32 sm:w-36">

@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { brandAssets } from '../../data/assets';
+import { EditorialFaceBlur } from '../common/EditorialFaceBlur';
 
 export const Section1Hero: React.FC = () => {
   const [isHoveredCTA, setIsHoveredCTA] = useState(false);
@@ -46,16 +47,19 @@ export const Section1Hero: React.FC = () => {
         <img src={brandAssets.monogram} alt="" className="w-full h-auto object-contain" />
       </div>
 
-      {/* Kinetic Layer 1: Real Campaign Silhouette in Studio */}
+      {/* Kinetic Layer 1: Real Campaign Silhouette in Studio with Fun Editorial Face Blur */}
       <motion.div
         style={{ x: bgShiftX }}
         className="absolute right-[-2%] sm:right-[4%] top-[12%] w-[68vw] sm:w-[45vw] md:w-[38vw] max-w-[480px] h-[55vh] max-h-[620px] pointer-events-none z-0 opacity-40 md:opacity-60 overflow-hidden border border-line"
       >
-        <img
-          src="/images/campaign-hero-motion.jpg"
-          alt="Campaign silhouette in motion"
-          className="w-full h-full object-cover grayscale contrast-125 brightness-90 filter"
-        />
+        <div className="relative w-full h-full">
+          <img
+            src="/images/campaign-hero-motion.jpg"
+            alt="Campaign silhouette in motion"
+            className="w-full h-full object-cover grayscale contrast-125 brightness-90 filter"
+          />
+          <EditorialFaceBlur top="16%" left="50%" width="72px" height="38px" label="LM // PRIVATE" />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
         <div className="absolute bottom-3 left-3 font-mono text-[9px] text-smoke/80 tracking-widest uppercase bg-black/60 px-2 py-0.5 border border-line/40">
           STUDIO TELEMETRY / FRAME 01
@@ -67,11 +71,15 @@ export const Section1Hero: React.FC = () => {
         style={{ x: cutoutX, y: cutoutY }}
         className="absolute left-[8%] sm:left-[22%] md:left-[28%] top-[24%] sm:top-[18%] w-[72vw] sm:w-[52vw] md:w-[44vw] max-w-[560px] pointer-events-none z-10 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
       >
-        <img
-          src="/images/shorts-001-cutout.jpg"
-          alt="LM Shorts 001 with signature vertical arch graphic"
-          className="w-full h-auto object-contain"
-        />
+        <div className="relative w-full h-auto">
+          <img
+            src="/images/shorts-001-cutout.jpg"
+            alt="LM Shorts 001 with signature vertical arch graphic"
+            className="w-full h-auto object-contain"
+          />
+          {/* Fun Editorial Face Blur on full look cutout */}
+          <EditorialFaceBlur top="7%" left="50%" width="84px" height="44px" label="LM // 001" />
+        </div>
         {/* Archival Pin Label */}
         <div className="absolute top-[35%] right-[10%] bg-black/80 border border-gold/60 backdrop-blur-sm px-2.5 py-1 flex items-center space-x-1.5 shadow-xl">
           <span className="w-1.5 h-1.5 bg-gold rounded-none" />
