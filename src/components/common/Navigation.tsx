@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '../../store/cartStore';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { brandAssets } from '../../data/assets';
 
 const MENU_ITEMS = [
   {
@@ -103,17 +104,19 @@ export const Navigation: React.FC = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 flex items-center justify-between">
-          {/* Left: LM Monogram & release tag */}
+          {/* Left: Official LM Monogram */}
           <div className="flex items-center space-x-3">
             <Link
               to="/"
               className="group flex items-center space-x-2.5 focus:outline-none focus-visible:ring-1 focus-visible:ring-gold"
               aria-label="Lawrence Monroe Home"
             >
-              <div className="w-8 h-8 border border-line bg-graphite/40 group-hover:border-gold transition-colors duration-300 flex items-center justify-center relative overflow-hidden">
-                <span className="font-mono text-xs font-bold text-bone tracking-widest group-hover:text-gold transition-colors">
-                  LM
-                </span>
+              <div className="w-8 h-8 border border-line bg-graphite/40 group-hover:border-gold transition-colors duration-300 flex items-center justify-center p-1.5 relative overflow-hidden">
+                <img
+                  src={brandAssets.monogram}
+                  alt="LM Monogram"
+                  className="w-full h-full object-contain filter brightness-105"
+                />
                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </div>
               <span className="hidden sm:inline-block font-mono text-[10px] text-smoke tracking-ultra">
@@ -122,22 +125,24 @@ export const Navigation: React.FC = () => {
             </Link>
           </div>
 
-          {/* Center: LAWRENCE MONROE Wordmark */}
+          {/* Center: Official LAWRENCE MONROE Wordmark Image */}
           <div className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-auto">
             <Link
               to="/"
               className="group inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             >
-              <h1
-                className={`font-display tracking-tight font-extrabold text-bone transition-all duration-300 uppercase ${
-                  isScrolled
-                    ? 'text-sm sm:text-base tracking-[0.25em]'
-                    : 'text-base sm:text-xl md:text-2xl tracking-[0.3em]'
-                }`}
+              <div
+                className={`transition-all duration-300 ${
+                  isScrolled ? 'h-4 sm:h-5' : 'h-5 sm:h-7'
+                } flex items-center justify-center`}
               >
-                LAWRENCE MONROE
-              </h1>
-              <div className="w-0 group-hover:w-full h-[1px] bg-gold mx-auto transition-all duration-300" />
+                <img
+                  src={brandAssets.wordmark}
+                  alt="LAWRENCE MONROE"
+                  className="h-full w-auto max-w-[240px] sm:max-w-[360px] object-contain filter brightness-105 group-hover:brightness-125 transition-all"
+                />
+              </div>
+              <div className="w-0 group-hover:w-full h-[1px] bg-gold mx-auto transition-all duration-300 mt-1" />
             </Link>
           </div>
 
@@ -193,8 +198,8 @@ export const Navigation: React.FC = () => {
             {/* Top Bar inside menu */}
             <div className="max-w-7xl w-full mx-auto px-5 sm:px-8 md:px-12 py-6 md:py-8 flex items-center justify-between border-b border-line">
               <div className="flex items-center space-x-3">
-                <span className="font-mono text-xs tracking-widest text-gold">LM / INDEX</span>
-                <span className="font-mono text-[10px] text-smoke hidden sm:inline">PRIVATE RELEASE SYSTEM</span>
+                <img src={brandAssets.monogram} alt="LM" className="w-5 h-5 object-contain" />
+                <span className="font-mono text-xs tracking-widest text-gold">LM / ARCHIVE INDEX</span>
               </div>
 
               <button
@@ -222,7 +227,7 @@ export const Navigation: React.FC = () => {
                       className="w-full text-left flex items-baseline justify-between py-2 border-b border-line/40 group-hover:border-gold transition-colors focus:outline-none"
                     >
                       <div className="flex items-baseline space-x-4 sm:space-x-6">
-                        <span className="font-mono text-xs sm:text-sm text-gold">
+                        <span className="font-mono text-xs sm:text-sm text-gold font-bold">
                           0{idx + 1}
                         </span>
                         <span className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-bone group-hover:text-gold transition-colors duration-300">
@@ -252,7 +257,7 @@ export const Navigation: React.FC = () => {
                     className="w-full text-left flex items-baseline justify-between py-2 border-b border-line/40 hover:border-gold transition-colors"
                   >
                     <div className="flex items-baseline space-x-4 sm:space-x-6">
-                      <span className="font-mono text-xs sm:text-sm text-gold">05</span>
+                      <span className="font-mono text-xs sm:text-sm text-gold font-bold">05</span>
                       <span className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-bone hover:text-gold transition-colors">
                         CART BAG
                       </span>
@@ -293,7 +298,7 @@ export const Navigation: React.FC = () => {
                         </div>
                       </div>
                       <div className="font-mono text-[9px] text-smoke border border-line px-2 py-1 bg-black/60 backdrop-blur-sm">
-                        LM SPECIMEN
+                        LM ARCHIVE
                       </div>
                     </div>
                   </motion.div>

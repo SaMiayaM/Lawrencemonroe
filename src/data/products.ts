@@ -11,42 +11,42 @@ export const RELEASED_PRODUCTS: Product[] = [
     currency: 'USD',
     status: 'ACTIVE',
     stockCount: 14,
-    badge: 'ACTIVE RELEASE',
+    badge: 'ARCHIVE BLACK',
     colors: [
-      { name: 'Pitch Black', code: 'BLK', hex: '#0A0A0A', borderHex: '#303030' },
-      { name: 'Bone White', code: 'BNE', hex: '#E7E1D7', borderHex: '#9A958D' },
+      { name: 'Pitch Black / White Arch', code: 'BLK', hex: '#0A0A0A', borderHex: '#303030' },
+      { name: 'Heather Grey / Blue Arch', code: 'GRY', hex: '#C0BFBB', borderHex: '#9A958D' },
     ],
-    selectedColorDefault: 'Pitch Black',
+    selectedColorDefault: 'Pitch Black / White Arch',
     sizes: [
       { size: 'S', available: true, stock: 3 },
       { size: 'M', available: true, stock: 5 },
       { size: 'L', available: true, stock: 4 },
       { size: 'XL', available: true, stock: 2 },
     ],
-    shortDescription: 'Heavyweight 480GSM French terry architectural short with elongated tubular drawstrings and custom brushed antique gold hardware.',
-    story: 'Engineered as the foundational pillar of Release 001. Built with an uncompromising focus on structural silhouette, substantial hand-feel, and enduring repeat wear. The custom double-faced weave drapes with intentional rigidity, resisting collapse while adapting to dynamic motion.',
+    shortDescription: 'Heavyweight black cotton architectural shorts featuring the signature vertical Lawrence arch graphic on the left leg, upper thigh badge, and raw cut hem.',
+    story: 'Engineered as the definitive silhouette of Release 001. Cut with an uncompromising boxy streetwear drop, raw edge knee finish, and screenprinted with the high-contrast distressed Lawrence arch pill. Designed to hold its structural shape through continuous movement.',
     fit: [
-      'Relaxed boxy architectural silhouette',
-      'Dropped crotch with structured gusset for unrestricted movement',
-      'Sits comfortably at the natural waist or relaxed on hips',
-      'Hits just above the knee with clean proportioned hem',
-      'True to size for intended draped fit; size down for standard slim taper'
+      'Relaxed boxy streetwear silhouette hitting right at the knee',
+      'Dropped crotch with spacious leg opening for natural drape',
+      'Elasticized waistband with internal heavy drawstrings',
+      'Raw cut unfinished hem with interior lockstitch to prevent fraying',
+      'True to size for signature drape; size down for standard above-knee taper'
     ],
     construction: [
-      '480 GSM ultra-heavyweight combed French terry',
-      'High-density ribbed waistband with reinforced 4-needle stitching',
-      'Custom elongated tubular drawstrings with debossed antique gold aglets',
-      'Deep side welt pockets with concealed interior device sleeve',
-      'Rear welt pocket secured with reinforced gold-thread bartacks',
-      'Discreet tonal monogram embroidery at lower left hem'
+      '480 GSM ultra-heavyweight combed cotton jersey',
+      'High-density distressed screenprinted vertical Lawrence arch graphic (left leg)',
+      'Subtle LawrenceMonroe oval insignia print (right upper thigh)',
+      'High-density 4-needle elastic waistband',
+      'Deep side seam pockets and secure rear welt pocket',
+      'Raw cut hemline designed to naturally roll slightly with wear'
     ],
     fabricAndCare: [
-      '100% Organic Heavyweight Combed Cotton (480 GSM)',
-      'Pre-shrunk and garment-washed for broken-in softness without loss of structure',
-      'Machine wash cold inside out with like colors',
-      'Do not bleach or tumble dry hot',
-      'Line dry in shade to preserve deep tone and fiber integrity',
-      'Cool iron inside out if necessary'
+      '100% Organic Heavyweight Cotton (480 GSM)',
+      'Garment washed and pre-shrunk to preserve exact graphic alignment',
+      'Machine wash cold inside out with like darks',
+      'Do not bleach or dry clean',
+      'Line dry in shade to preserve deep pitch black tone and screenprint integrity',
+      'Cool iron inside out if desired (avoid direct contact with graphic)'
     ],
     shippingAndReturns: [
       'Ships within 2–4 business days via carbon-neutral priority courier',
@@ -61,35 +61,28 @@ export const RELEASED_PRODUCTS: Product[] = [
         id: 'img-1',
         url: '/images/shorts-001-cutout.jpg',
         label: 'Front',
-        alt: 'LM Shorts 001 - Front silhouette in pitch black',
+        alt: 'LM Shorts 001 - Front full look with white arch graphic on left leg',
         type: 'cutout'
       },
       {
         id: 'img-2',
         url: '/images/campaign-hero-motion.jpg',
         label: 'On Body',
-        alt: 'LM Shorts 001 - Cropped on-body motion view',
+        alt: 'LM Shorts 001 - 3/4 standing angle showing silhouette drape',
         type: 'lifestyle'
       },
       {
         id: 'img-3',
-        url: '/images/campaign-contact-hardware.jpg',
+        url: '/images/shorts-001-back.jpg',
         label: 'Detail',
-        alt: 'LM Shorts 001 - Antique gold eyelet and drawstring aglet detail',
+        alt: 'LM Shorts 001 - Studio seated study',
         type: 'detail'
       },
       {
         id: 'img-4',
-        url: '/images/shorts-001-back.jpg',
-        label: 'Back',
-        alt: 'LM Shorts 001 - Back view with reinforced pocket structure',
-        type: 'cutout'
-      },
-      {
-        id: 'img-5',
-        url: '/images/campaign-contact-fabric.jpg',
+        url: '/images/campaign-contact-hardware.jpg',
         label: 'Fabric',
-        alt: 'LM Shorts 001 - 480GSM French terry macro texture',
+        alt: 'LM Shorts 001 - Heavyweight cotton weave and waistband detail',
         type: 'macro'
       }
     ]
@@ -97,47 +90,48 @@ export const RELEASED_PRODUCTS: Product[] = [
   {
     id: 'lm-shorts-002',
     slug: 'lm-shorts-002',
-    code: 'LMS-002-BNE',
+    code: 'LMS-002-GRY',
     name: 'LM SHORTS 002',
     release: 'RELEASE 001 / ACTIVE',
     price: 165.00,
     currency: 'USD',
     status: 'ACTIVE',
     stockCount: 9,
-    badge: 'EDITION DUAL',
+    badge: 'ARCHIVE HEATHER',
     colors: [
-      { name: 'Bone White', code: 'BNE', hex: '#E7E1D7', borderHex: '#9A958D' },
-      { name: 'Pitch Black', code: 'BLK', hex: '#0A0A0A', borderHex: '#303030' },
+      { name: 'Heather Grey / Blue Arch', code: 'GRY', hex: '#C0BFBB', borderHex: '#9A958D' },
+      { name: 'Pitch Black / White Arch', code: 'BLK', hex: '#0A0A0A', borderHex: '#303030' },
     ],
-    selectedColorDefault: 'Bone White',
+    selectedColorDefault: 'Heather Grey / Blue Arch',
     sizes: [
       { size: 'S', available: true, stock: 2 },
       { size: 'M', available: true, stock: 3 },
       { size: 'L', available: true, stock: 3 },
       { size: 'XL', available: true, stock: 1 },
     ],
-    shortDescription: 'Raw bone cotton twill architectural short with contrast charcoal drawstrings and brushed antique gold hardware.',
-    story: 'A stark tonal inverse crafted from raw-pigment bone cotton. The high-contrast graphite hardware and custom braided cords accentuate the geometric lines of the garment, celebrating the pure architecture of fabric and negative space.',
+    shortDescription: 'Heavyweight athletic heather grey cotton shorts with electric cobalt blue Lawrence arch graphic and raw cut hem.',
+    story: 'The tonal dual iteration in athletic heather grey. Accented by a vibrant electric blue vertical Lawrence arch on the left thigh and matching mini oval insignia. Delivers vintage athletic character grounded in contemporary streetwear proportions.',
     fit: [
-      'Relaxed boxy architectural silhouette',
-      'Tailored dropped crotch for ease of movement',
-      'Elasticized waistband with long custom contrast cords',
-      'Clean above-the-knee hemline',
+      'Relaxed boxy streetwear silhouette hitting right at the knee',
+      'Dropped crotch with spacious leg opening for natural drape',
+      'Elasticized waistband with internal heavy drawstrings',
+      'Raw cut unfinished hem with interior lockstitch to prevent fraying',
       'True to size for signature drape'
     ],
     construction: [
-      '480 GSM raw natural pigment combed cotton twill',
-      'Contrasting washed graphite tubular drawstrings with antique gold tips',
-      'Reinforced side seam split with interior twill tape binding',
+      '480 GSM athletic heather combed cotton',
+      'Cobalt blue distressed screenprinted vertical Lawrence arch graphic (left leg)',
+      'Matching cobalt blue LawrenceMonroe oval insignia (right upper thigh)',
+      'High-density 4-needle elastic waistband',
       'Deep dual front welt pockets and secure rear pocket',
-      'Custom stamped edition number interior label'
+      'Raw cut hemline designed to naturally roll slightly with wear'
     ],
     fabricAndCare: [
-      '100% Unbleached Raw Combed Cotton (480 GSM)',
-      'Natural raw tone with subtle organic fleck variations',
+      '100% Organic Combed Athletic Cotton (480 GSM)',
+      'Heather melange weave with subtle natural shade variations',
       'Machine wash gentle cold inside out',
-      'Dry flat in shade; do not tumble dry',
-      'Warm iron inside out'
+      'Line dry in shade to preserve crisp graphic color',
+      'Warm iron inside out if needed'
     ],
     shippingAndReturns: [
       'Ships within 2–4 business days in serialized packaging',
@@ -152,29 +146,22 @@ export const RELEASED_PRODUCTS: Product[] = [
         id: 'img-bne-1',
         url: '/images/shorts-002-cutout.jpg',
         label: 'Front',
-        alt: 'LM Shorts 002 - Front silhouette in raw bone',
+        alt: 'LM Shorts 002 - Front full look with electric blue arch graphic on left leg',
         type: 'cutout'
       },
       {
         id: 'img-bne-2',
         url: '/images/campaign-contact-stride.jpg',
         label: 'On Body',
-        alt: 'LM Shorts 002 - On-body lower stride crop',
+        alt: 'LM Shorts 002 - 3/4 standing view showing blue graphic and drape',
         type: 'lifestyle'
       },
       {
         id: 'img-bne-3',
         url: '/images/shorts-002-detail.jpg',
         label: 'Detail',
-        alt: 'LM Shorts 002 - Seam and fabric macro detail',
+        alt: 'LM Shorts 002 - Heather weave and raw hem detail',
         type: 'detail'
-      },
-      {
-        id: 'img-bne-4',
-        url: '/images/campaign-contact-hardware.jpg',
-        label: 'Fabric',
-        alt: 'LM Shorts 002 - Custom hardware and cord construction',
-        type: 'macro'
       }
     ]
   }

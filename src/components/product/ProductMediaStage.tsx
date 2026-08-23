@@ -1,114 +1,200 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Maximize2, ZoomIn } from 'lucide-react';
-import { ProductGalleryItem } from '../../types';
+import { Eye, ZoomIn, Layers, Sparkles } from 'lucide-react';
+import { SHORTS_001_VISUALS, SHORTS_002_VISUALS, ProductVisual } from '../../data/assets';
 
 interface ProductMediaStageProps {
-  images: ProductGalleryItem[];
+  productId: string;
   productName: string;
 }
 
-export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ images, productName }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isZoomed, setIsZoomed] = useState(false);
-  const [zoomCoords, setZoomCoords] = useState({ x: 50, y: 50 });
+export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId, productName }) => {
+  const visuals: ProductVisual[] = productId === 'lm-shorts-002' ? SHORTS_002_VISUALS : SHORTS_001_VISUALS;
+  
+  const [activeVisualIndex, setActiveVisualIndex] = useState(0);
+  const [focusMode, setFocusMode] = useState<'full' | 'shorts'>('full');
+  const [showAnnotations, setShowAnnotations] = useState(false);
+  const [activeAnnotationId, setActiveAnnotationId] = useState<number | null>(null);
+  
+  // Mouse position for subtle 2px-4px micro-shift
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const activeImage = images[activeIndex] || images[0];
+  const activeVisual = visuals[activeVisualIndex] || visuals[0];
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setZoomCoords({ x, y });
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 6; // max 3px shift
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 6;
+    setMousePos({ x, y });
   };
 
   return (
     <div className="space-y-4">
+      {/* Top Inspection Controls Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border border-line bg-black/60 p-2.5 font-mono text-xs">
+        {/* Full Look vs Shorts Focus Mode Toggle */}
+        <div className="flex items-center space-x-1 border border-line/60 bg-graphite p-0.5">
+          <button
+            onClick={() => {
+              setFocusMode('full');
+            }}
+            className={`px-3 py-1.5 uppercase font-bold text-[11px] transition-colors ${
+              focusMode === 'full'
+                ? 'bg-black text-gold border border-gold/60 shadow-sm'
+                : 'text-smoke hover:text-bone'
+            }`}
+          >
+            FULL LOOK
+          </button>
+          <button
+            onClick={() => {
+              setFocusMode('shorts');
+            }}
+            className={`px-3 py-1.5 uppercase font-bold text-[11px] transition-colors flex items-center space-x-1.5 ${
+              focusMode === 'shorts'
+                ? 'bg-black text-gold border border-gold/60 shadow-sm'
+                : 'text-smoke hover:text-bone'
+            }`}
+          >
+            <ZoomIn size={12} />
+            <span>SHORTS FOCUS</span>
+          </button>
+        </div>
+
+        {/* Inspection Annotations Toggle */}
+        {activeVisual.annotations && activeVisual.annotations.length > 0 && (
+          <button
+            onClick={() => setShowAnnotations(!showAnnotations)}
+            className={`px-3 py-1.5 uppercase font-mono text-[11px] tracking-wider transition-colors border flex items-center space-x-1.5 ${
+              showAnnotations
+                ? 'border-gold bg-gold/10 text-gold font-bold'
+                : 'border-line text-smoke hover:text-bone hover:border-smoke'
+            }`}
+          >
+            <Eye size={13} />
+            <span>{showAnnotations ? 'HIDE ANNOTATIONS' : 'INSPECTION MARKS'}</span>
+          </button>
+        )}
+      </div>
+
       {/* Main Interactive Stage with Print-Frame Border */}
       <div
         onMouseMove={handleMouseMove}
-        className="relative aspect-[4/5] bg-black border border-line overflow-hidden group contact-frame-border"
+        onMouseLeave={() => setMousePos({ x: 0, y: 0 })}
+        className="relative aspect-[4/5] bg-graphite/40 border border-line overflow-hidden group contact-frame-border"
       >
-        {/* Active Image with smooth crossfade and zoom on hover */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeImage.id}
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full h-full relative"
-          >
-            <img
-              src={activeImage.url}
-              alt={activeImage.alt || productName}
-              className={`w-full h-full object-cover transition-transform duration-200 ${
-                isZoomed ? 'scale-150' : 'scale-100 group-hover:scale-105'
-              } filter brightness-95 contrast-105`}
-              style={
-                isZoomed
-                  ? {
-                      transformOrigin: `${zoomCoords.x}% ${zoomCoords.y}%`,
-                    }
-                  : undefined
-              }
-            />
+        {/* Active Image with dynamic smooth zoom/crop animation */}
+        <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
+          <motion.img
+            key={activeVisual.id}
+            src={activeVisual.src}
+            alt={activeVisual.alt || productName}
+            animate={{
+              scale: focusMode === 'shorts' ? activeVisual.crop.desktop.scale : 1.02,
+              x: mousePos.x,
+              y: mousePos.y,
+            }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              transformOrigin: focusMode === 'shorts' ? activeVisual.crop.desktop.objectPosition : '50% 50%',
+            }}
+            className="w-full h-full object-cover filter contrast-105 brightness-95 select-none"
+          />
 
-            {/* Subtle Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none" />
-          </motion.div>
-        </AnimatePresence>
+          {/* Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none" />
 
-        {/* Frame Label Tag */}
+          {/* Interactive Annotation Markers (Shown when toggle is ON) */}
+          <AnimatePresence>
+            {showAnnotations && activeVisual.annotations && (
+              <>
+                {activeVisual.annotations.map((marker) => {
+                  const isActive = activeAnnotationId === marker.id;
+                  return (
+                    <div
+                      key={marker.id}
+                      style={{ top: marker.top, left: marker.left }}
+                      className="absolute -translate-x-1/2 -translate-y-1/2 z-30"
+                    >
+                      <button
+                        onClick={() => setActiveAnnotationId(isActive ? null : marker.id)}
+                        className={`group flex items-center justify-center w-6 h-6 border font-mono text-[10px] font-bold transition-transform ${
+                          isActive
+                            ? 'bg-gold text-black border-gold scale-125 ring-2 ring-gold/50'
+                            : 'bg-black/90 text-gold border-gold/80 hover:scale-110 hover:bg-gold hover:text-black'
+                        }`}
+                        aria-label={`Annotation marker ${marker.id}`}
+                      >
+                        0{marker.id}
+                      </button>
+
+                      {/* Tooltip on Active Marker */}
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 6, scale: 0.95 }}
+                          className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 bg-black/95 border border-gold p-2.5 shadow-2xl text-left pointer-events-none"
+                        >
+                          <div className="font-mono text-[10px] text-gold font-bold uppercase border-b border-line/40 pb-1 mb-1">
+                            {marker.label}
+                          </div>
+                          <p className="font-utility text-[11px] text-bone/90 leading-tight">
+                            {marker.description}
+                          </p>
+                        </motion.div>
+                      )}
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Top-Left Stage Badge */}
         <div className="absolute top-4 left-4 z-20 flex items-center space-x-2">
           <div className="font-mono text-[9px] bg-black/80 border border-gold/60 text-gold px-2.5 py-1 tracking-widest uppercase backdrop-blur-sm">
-            ANGLE: {activeImage.label} [{activeIndex + 1}/{images.length}]
+            {focusMode === 'shorts' ? 'MODE: SHORTS FOCUS' : 'MODE: FULL CAMPAIGN LOOK'} [{activeVisualIndex + 1}/{visuals.length}]
           </div>
         </div>
 
-        {/* Zoom Mode Toggle Button */}
-        <button
-          onClick={() => setIsZoomed(!isZoomed)}
-          className="absolute top-4 right-4 z-20 p-2 bg-black/80 border border-line hover:border-gold text-smoke hover:text-gold transition-colors focus:outline-none"
-          aria-label={isZoomed ? "Reset Zoom" : "Zoom Image Detail"}
-        >
-          {isZoomed ? <Maximize2 size={14} /> : <ZoomIn size={14} />}
-        </button>
-
-        {/* Telemetry Footer Info inside frame */}
+        {/* Telemetry Bottom Bar inside stage */}
         <div className="absolute bottom-3 left-4 right-4 z-20 flex items-center justify-between font-mono text-[9px] text-smoke pointer-events-none">
           <span className="bg-black/60 px-2 py-0.5 border border-line/40">
-            SPECIMEN ISOLATION // DOSSIER STAGE
+            SPECIMEN: {activeVisual.label}
           </span>
-          <span className="text-gold">480GSM FRENCH TERRY</span>
+          <span className="text-gold uppercase tracking-wider">
+            REAL ARCHIVE ASSET
+          </span>
         </div>
       </div>
 
-      {/* Gallery Image Selector Rail */}
-      <div className="grid grid-cols-5 gap-2 sm:gap-3">
-        {images.map((img, idx) => {
-          const isActive = idx === activeIndex;
+      {/* Truthful Real Visuals Selector Rail */}
+      <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
+        {visuals.map((vis, idx) => {
+          const isActive = idx === activeVisualIndex;
           return (
             <button
-              key={img.id}
+              key={vis.id}
               onClick={() => {
-                setActiveIndex(idx);
-                setIsZoomed(false);
+                setActiveVisualIndex(idx);
+                setActiveAnnotationId(null);
               }}
-              className={`relative aspect-square border bg-graphite overflow-hidden transition-all duration-300 group focus:outline-none ${
+              className={`relative aspect-[4/3] border bg-graphite overflow-hidden transition-all duration-300 group focus:outline-none ${
                 isActive
                   ? 'border-gold ring-1 ring-gold ring-offset-1 ring-offset-black'
                   : 'border-line hover:border-smoke/60 opacity-60 hover:opacity-100'
               }`}
-              aria-label={`View ${img.label} image`}
+              aria-label={`Select ${vis.label}`}
             >
               <img
-                src={img.url}
-                alt={img.alt}
+                src={vis.src}
+                alt={vis.alt}
                 className="w-full h-full object-cover grayscale contrast-115"
               />
-              <div className="absolute bottom-0 inset-x-0 bg-black/85 text-center font-mono text-[8px] py-0.5 text-bone font-medium tracking-wider uppercase">
-                {img.label}
+              <div className="absolute bottom-0 inset-x-0 bg-black/90 text-center font-mono text-[9px] py-1 text-bone font-bold tracking-wider uppercase border-t border-line/40">
+                {vis.label}
               </div>
             </button>
           );

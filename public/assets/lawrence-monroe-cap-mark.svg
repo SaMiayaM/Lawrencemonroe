@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" fill="none">
+  <!-- 2-Tier Arched Cap Embroidery Mark -->
+  <text 
+    x="200" 
+    y="80" 
+    text-anchor="middle" 
+    fill="#FFFFFF" 
+    font-family="'Anton', 'Impact', sans-serif" 
+    font-size="68" 
+    font-weight="800" 
+    letter-spacing="6"
+  >LAWRENCE</text>
+  <text 
+    x="200" 
+    y="155" 
+    text-anchor="middle" 
+    fill="#FFFFFF" 
+    font-family="'Anton', 'Impact', sans-serif" 
+    font-size="68" 
+    font-weight="800" 
+    letter-spacing="6"
+  >MONROE</text>
+</svg>

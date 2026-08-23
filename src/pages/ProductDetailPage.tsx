@@ -51,15 +51,15 @@ export const ProductDetailPage: React.FC = () => {
           <div className="flex items-center space-x-3">
             <span>RELEASE 001</span>
             <span className="text-gold">•</span>
-            <span className="text-bone">{product.code}</span>
+            <span className="text-bone font-bold">{product.code}</span>
           </div>
         </div>
 
         {/* Main Product Layout: Media Stage (Left) & Purchasing Panel (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-          {/* Left Column: Media Stage (7 cols) */}
+          {/* Left Column: Media Stage with dynamic Shorts Focus and Annotations (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
-            <ProductMediaStage images={product.images} productName={product.name} />
+            <ProductMediaStage productId={product.id} productName={product.name} />
 
             {/* Curatorial Garment Note below stage */}
             <div className="border border-line bg-graphite/30 p-6 space-y-2">

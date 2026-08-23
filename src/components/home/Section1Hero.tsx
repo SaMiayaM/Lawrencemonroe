@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { brandAssets } from '../../data/assets';
 
 export const Section1Hero: React.FC = () => {
   const [isHoveredCTA, setIsHoveredCTA] = useState(false);
@@ -14,12 +15,10 @@ export const Section1Hero: React.FC = () => {
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
-  // Layer translations (4px to 10px shift)
-  const cutoutX = useTransform(smoothMouseX, [-500, 500], [-10, 10]);
-  const cutoutY = useTransform(smoothMouseY, [-500, 500], [-8, 8]);
-  const bgShiftX = useTransform(smoothMouseX, [-500, 500], [6, -6]);
-  const bgShiftY = useTransform(smoothMouseY, [-500, 500], [5, -5]);
-  const numShiftX = useTransform(smoothMouseX, [-500, 500], [-14, 14]);
+  // Layer translations (2px to 6px subtle shift)
+  const cutoutX = useTransform(smoothMouseX, [-500, 500], [-6, 6]);
+  const cutoutY = useTransform(smoothMouseY, [-500, 500], [-5, 5]);
+  const bgShiftX = useTransform(smoothMouseX, [-500, 500], [4, -4]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -42,20 +41,15 @@ export const Section1Hero: React.FC = () => {
       {/* Background Graphic Grid */}
       <div className="absolute inset-0 bg-archival-grid opacity-60 pointer-events-none" />
 
-      {/* Oversized Background Release Number "001" */}
-      <motion.div
-        style={{ x: numShiftX }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0"
-      >
-        <span className="font-condensed font-extrabold text-[28vw] sm:text-[34vw] md:text-[38vw] leading-none text-graphite/40 tracking-tightest">
-          001
-        </span>
-      </motion.div>
+      {/* Faint oversized LM Monogram behind model at 3-6% opacity */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 opacity-5 w-[65vw] max-w-[680px]">
+        <img src={brandAssets.monogram} alt="" className="w-full h-auto object-contain" />
+      </div>
 
-      {/* Kinetic Layer 1: Background Motion Crop (Cropped model/torso stride, face omitted) */}
+      {/* Kinetic Layer 1: Real Campaign Silhouette in Studio */}
       <motion.div
-        style={{ x: bgShiftX, y: bgShiftY }}
-        className="absolute right-[-2%] sm:right-[5%] top-[14%] w-[68vw] sm:w-[45vw] md:w-[38vw] max-w-[480px] h-[55vh] max-h-[620px] pointer-events-none z-0 opacity-40 md:opacity-60 overflow-hidden border border-line"
+        style={{ x: bgShiftX }}
+        className="absolute right-[-2%] sm:right-[4%] top-[12%] w-[68vw] sm:w-[45vw] md:w-[38vw] max-w-[480px] h-[55vh] max-h-[620px] pointer-events-none z-0 opacity-40 md:opacity-60 overflow-hidden border border-line"
       >
         <img
           src="/images/campaign-hero-motion.jpg"
@@ -68,21 +62,21 @@ export const Section1Hero: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Kinetic Layer 2: Floating Shorts Cutout (Primary Object focus) */}
+      {/* Kinetic Layer 2: Transparent Shorts Centerpiece Cutout */}
       <motion.div
         style={{ x: cutoutX, y: cutoutY }}
-        className="absolute left-[8%] sm:left-[22%] md:left-[30%] top-[24%] sm:top-[20%] w-[70vw] sm:w-[50vw] md:w-[42vw] max-w-[540px] pointer-events-none z-10 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+        className="absolute left-[8%] sm:left-[22%] md:left-[28%] top-[24%] sm:top-[18%] w-[72vw] sm:w-[52vw] md:w-[44vw] max-w-[560px] pointer-events-none z-10 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
       >
         <img
           src="/images/shorts-001-cutout.jpg"
-          alt="LM Shorts 001 primary silhouette"
+          alt="LM Shorts 001 with signature vertical arch graphic"
           className="w-full h-auto object-contain"
         />
-        {/* Archival Pin Label on garment */}
-        <div className="absolute top-[35%] right-[10%] bg-black/80 border border-gold/60 backdrop-blur-sm px-2 py-1 flex items-center space-x-1.5 shadow-xl">
+        {/* Archival Pin Label */}
+        <div className="absolute top-[35%] right-[10%] bg-black/80 border border-gold/60 backdrop-blur-sm px-2.5 py-1 flex items-center space-x-1.5 shadow-xl">
           <span className="w-1.5 h-1.5 bg-gold rounded-none" />
           <span className="font-mono text-[9px] text-bone tracking-widest uppercase">
-            SPEC: LMS-001 / 480GSM
+            SPEC: LMS-001 / ARCHIVE
           </span>
         </div>
       </motion.div>
@@ -91,7 +85,7 @@ export const Section1Hero: React.FC = () => {
       <div className="max-w-7xl w-full mx-auto px-5 sm:px-8 md:px-12 relative z-20 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <span className="inline-block w-2 h-2 bg-gold" />
-          <span className="font-mono text-[11px] sm:text-xs text-gold tracking-widest uppercase">
+          <span className="font-mono text-[11px] sm:text-xs text-gold tracking-widest uppercase font-bold">
             RELEASE 001 / FIRST ALLOCATION
           </span>
         </div>
@@ -100,19 +94,21 @@ export const Section1Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Center Display: Massive LAWRENCE MONROE Typography */}
+      {/* Center Display: Official LAWRENCE MONROE Wordmark Asset */}
       <div className="max-w-7xl w-full mx-auto px-5 sm:px-8 md:px-12 relative z-20 my-auto py-12 md:py-20">
-        <div className="space-y-4">
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display-massive text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-bone tracking-tighter uppercase select-none"
-            >
-              LAWRENCE MONROE
-            </motion.h1>
-          </div>
+        <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-4xl"
+          >
+            <img
+              src={brandAssets.wordmark}
+              alt="LAWRENCE MONROE"
+              className="w-full h-auto object-contain filter brightness-110 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+            />
+          </motion.div>
 
           <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 pt-2">
             <div className="flex items-center space-x-4">
@@ -120,11 +116,11 @@ export const Section1Hero: React.FC = () => {
                 [001]
               </span>
               <span className="font-serif italic text-lg sm:text-2xl text-smoke">
-                Form in motion.
+                Two pieces. One uniform.
               </span>
             </div>
             <div className="font-mono text-[11px] text-smoke max-w-sm leading-relaxed">
-              ARCHITECTURAL SILHOUETTES CRAFTED FROM 480GSM FRENCH TERRY. LIMITED PRIVATE EDITION.
+              ARCHITECTURAL SILHOUETTES CRAFTED FROM 480GSM COTTON WITH DISTRESSED ARCH GRAPHICS.
             </div>
           </div>
         </div>
@@ -150,7 +146,7 @@ export const Section1Hero: React.FC = () => {
               onClick={handleScrollToManifesto}
               onMouseEnter={() => setIsHoveredCTA(true)}
               onMouseLeave={() => setIsHoveredCTA(false)}
-              className="group relative bg-bone hover:bg-gold text-black px-6 sm:px-8 py-3.5 font-mono text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center space-x-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="group relative bg-bone hover:bg-gold text-black px-6 sm:px-8 py-3.5 font-mono text-xs font-bold tracking-widest uppercase transition-all duration-300 flex items-center space-x-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold shadow-2xl"
             >
               <span>ENTER RELEASE</span>
               <ArrowDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
@@ -160,7 +156,7 @@ export const Section1Hero: React.FC = () => {
               to="/shop"
               className="group inline-flex items-center space-x-1.5 font-mono text-xs text-bone hover:text-gold tracking-widest uppercase transition-colors"
             >
-              <span className="gold-line-sweep">VIEW THE PIECES</span>
+              <span className="gold-line-sweep">VIEW INDEX</span>
               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-gold" />
             </Link>
           </div>
@@ -168,12 +164,12 @@ export const Section1Hero: React.FC = () => {
           {/* Edition / Release Coordinates */}
           <div className="flex items-center space-x-6 font-mono text-[10px] text-smoke">
             <div>
-              <span className="text-smoke/60">SPEC: </span>
-              <span className="text-bone">LMS-480GSM</span>
+              <span className="text-smoke/60">EDITION: </span>
+              <span className="text-gold font-bold">01 / 02</span>
             </div>
             <div>
               <span className="text-smoke/60">AVAILABILITY: </span>
-              <span className="text-gold">ACTIVE</span>
+              <span className="text-bone">ACTIVE</span>
             </div>
           </div>
         </div>

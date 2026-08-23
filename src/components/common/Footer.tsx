@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
 import { useCartStore } from '../../store/cartStore';
+import { brandAssets } from '../../data/assets';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -168,10 +169,14 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Large Monogram / Wordmark Strip */}
+        {/* Official Wordmark Strip in Footer */}
         <div className="pt-12 pb-8 flex flex-col md:flex-row items-baseline justify-between gap-6">
-          <div className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-bone/20 hover:text-bone/40 transition-colors uppercase select-none">
-            LAWRENCE MONROE
+          <div className="w-full max-w-xl opacity-30 hover:opacity-60 transition-opacity">
+            <img
+              src={brandAssets.wordmark}
+              alt="LAWRENCE MONROE"
+              className="w-full h-auto object-contain"
+            />
           </div>
 
           <div className="font-mono text-[10px] text-smoke space-y-1 text-left md:text-right">

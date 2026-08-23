@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <text 
+    x="60" 
+    y="86" 
+    text-anchor="middle" 
+    fill="#E7E1D7" 
+    font-family="'Cormorant Garamond', 'Didot', 'Cinzel', serif" 
+    font-size="82" 
+    font-weight="700" 
+    letter-spacing="2"
+  >LM</text>
+  <line x1="28" y1="100" x2="92" y2="100" stroke="#AD8A48" stroke-width="2" />
+</svg>
