@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, ZoomIn, Sparkles, Shield, UserX } from 'lucide-react';
+import { Eye, ZoomIn, UserX } from 'lucide-react';
 import { SHORTS_001_VISUALS, SHORTS_002_VISUALS, ProductVisual } from '../../data/assets';
 import { EditorialFaceBlur } from '../common/EditorialFaceBlur';
 
@@ -11,13 +11,14 @@ interface ProductMediaStageProps {
 
 export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId, productName }) => {
   const visuals: ProductVisual[] = productId === 'lm-shorts-002' ? SHORTS_002_VISUALS : SHORTS_001_VISUALS;
+  const isHeather = productId === 'lm-shorts-002';
   
   const [activeVisualIndex, setActiveVisualIndex] = useState(0);
   const [focusMode, setFocusMode] = useState<'full' | 'shorts'>('full');
   const [showAnnotations, setShowAnnotations] = useState(false);
   const [activeAnnotationId, setActiveAnnotationId] = useState<number | null>(null);
   const [faceBlurActive, setFaceBlurActive] = useState(true);
-  const [blurStyle, setBlurStyle] = useState<'frosted-glass' | 'pixel-tape' | 'monogram-censor'>('frosted-glass');
+  const [blurStyle, setBlurStyle] = useState<'vintage-bar' | 'vintage-stamp' | 'grain-halftone'>('vintage-bar');
   
   // Mouse position for subtle 2px-4px micro-shift
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -34,7 +35,7 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
   return (
     <div className="space-y-4">
       {/* Top Inspection & Focus Controls Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border border-line bg-black/70 p-2.5 font-mono text-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 border border-line bg-black/80 p-2.5 font-mono text-xs">
         {/* Full Look vs Shorts Focus Mode Toggle */}
         <div className="flex items-center space-x-1 border border-line/60 bg-graphite p-0.5">
           <button
@@ -60,20 +61,19 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
           </button>
         </div>
 
-        {/* Action Controls: Fun Face Blur Toggle & Inspection Annotations */}
+        {/* Action Controls: Vintage Face Blur & Inspection Annotations */}
         <div className="flex items-center space-x-2">
-          {/* Face Blur Toggle */}
+          {/* Vintage Face Blur Control */}
           {focusMode === 'full' && (
             <button
               onClick={() => {
                 if (!faceBlurActive) {
                   setFaceBlurActive(true);
                 } else {
-                  // Cycle blur style or toggle
-                  if (blurStyle === 'frosted-glass') setBlurStyle('pixel-tape');
-                  else if (blurStyle === 'pixel-tape') setBlurStyle('monogram-censor');
+                  if (blurStyle === 'vintage-bar') setBlurStyle('vintage-stamp');
+                  else if (blurStyle === 'vintage-stamp') setBlurStyle('grain-halftone');
                   else {
-                    setBlurStyle('frosted-glass');
+                    setBlurStyle('vintage-bar');
                     setFaceBlurActive(false);
                   }
                 }
@@ -83,11 +83,11 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
                   ? 'border-gold bg-gold/10 text-gold font-bold'
                   : 'border-line text-smoke hover:text-bone'
               }`}
-              title="Toggle playful high-fashion editorial face obscurity"
+              title="Toggle vintage editorial face obscurity"
             >
               <UserX size={12} />
               <span>
-                {faceBlurActive ? `BLUR: ${blurStyle === 'frosted-glass' ? 'FROSTED' : blurStyle === 'pixel-tape' ? 'TAPE' : 'MONOGRAM'}` : 'BLUR: OFF'}
+                {faceBlurActive ? `FACE: ${blurStyle === 'vintage-bar' ? 'VINTAGE BAR' : blurStyle === 'vintage-stamp' ? 'LOGO STAMP' : 'GRAIN BLUR'}` : 'FACE: CLEAR'}
               </span>
             </button>
           )}
@@ -133,15 +133,16 @@ export const ProductMediaStage: React.FC<ProductMediaStageProps> = ({ productId,
             className="w-full h-full object-cover filter contrast-105 brightness-95 select-none"
           />
 
-          {/* Fun Editorial Face Blur Overlay (Active in Full Look Mode) */}
+          {/* Vintage Editorial Face Obscurity Overlay (Active in Full Look Mode) */}
           {faceBlurActive && focusMode === 'full' && (
             <EditorialFaceBlur
               variant={blurStyle}
               top={activeVisual.id.includes('seated') ? '12%' : '8%'}
               left="50%"
-              width={activeVisual.id.includes('seated') ? '94px' : '82px'}
-              height="46px"
-              label="LM // PRIVATE RELEASE"
+              width={activeVisual.id.includes('seated') ? '104px' : '96px'}
+              height="34px"
+              label="LAWRENCE MONROE"
+              badgeType={isHeather ? 'blue' : 'white'}
             />
           )}
 
