@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Plus, ZoomIn } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { RELEASED_PRODUCTS } from '../../data/products';
 import { formatCurrency } from '../../utils/format';
 import { useCartStore } from '../../store/cartStore';
+import { brandAssets } from '../../data/assets';
 
 export const Section4ReleasedPieces: React.FC = () => {
   const [product1Focus, setProduct1Focus] = useState<'full' | 'shorts'>('full');
@@ -91,12 +92,13 @@ export const Section4ReleasedPieces: React.FC = () => {
                 className="w-full h-full object-cover filter brightness-95 contrast-105"
               />
 
-              {/* Floating Gold Edition Stamp */}
-              <div className="absolute top-4 left-4 z-20">
-                <div className="inline-flex items-center space-x-1.5 font-mono text-[9px] border border-gold bg-black/80 backdrop-blur-sm px-2.5 py-1 text-gold tracking-widest uppercase">
-                  <span className="w-1.5 h-1.5 bg-gold" />
-                  <span>EDITION 001 // BLACK</span>
-                </div>
+              {/* Official White Pill Badge Stamp */}
+              <div className="absolute top-4 left-4 z-20 w-32 sm:w-36">
+                <img
+                  src={brandAssets.whiteBadge}
+                  alt="LawrenceMonroe"
+                  className="w-full h-auto object-contain drop-shadow-md"
+                />
               </div>
 
               {/* Inset Focus Tag */}
@@ -147,6 +149,10 @@ export const Section4ReleasedPieces: React.FC = () => {
                 <span className="text-bone">DISTRESSED WHITE ARCH PILL</span>
               </div>
               <div className="flex justify-between">
+                <span>INSIGNIA:</span>
+                <span className="text-bone">WHITE LawrenceMonroe® BADGE</span>
+              </div>
+              <div className="flex justify-between">
                 <span>FABRIC:</span>
                 <span className="text-bone">480GSM COTTON TERRY</span>
               </div>
@@ -187,7 +193,7 @@ export const Section4ReleasedPieces: React.FC = () => {
             </span>
           </div>
 
-          {/* Left Column: Key Commerce Data (Inverted column order on desktop for asymmetrical rhythm) */}
+          {/* Left Column: Key Commerce Data */}
           <div className="order-2 lg:order-1 lg:col-span-5 relative z-10 space-y-6 lg:pr-6">
             <div className="space-y-2">
               <div className="flex items-center justify-between font-mono text-xs text-smoke">
@@ -215,6 +221,10 @@ export const Section4ReleasedPieces: React.FC = () => {
               <div className="flex justify-between">
                 <span>GRAPHIC:</span>
                 <span className="text-bone">COBALT BLUE ARCH PILL</span>
+              </div>
+              <div className="flex justify-between">
+                <span>INSIGNIA:</span>
+                <span className="text-bone">BLUE LawrenceMonroe® BADGE</span>
               </div>
               <div className="flex justify-between">
                 <span>FABRIC:</span>
@@ -268,12 +278,13 @@ export const Section4ReleasedPieces: React.FC = () => {
                 className="w-full h-full object-cover filter brightness-95 contrast-105"
               />
 
-              {/* Floating Gold Edition Stamp */}
-              <div className="absolute top-4 left-4 z-20">
-                <div className="inline-flex items-center space-x-1.5 font-mono text-[9px] border border-gold bg-black/80 backdrop-blur-sm px-2.5 py-1 text-gold tracking-widest uppercase">
-                  <span className="w-1.5 h-1.5 bg-gold" />
-                  <span>EDITION 002 // HEATHER</span>
-                </div>
+              {/* Official Blue Pill Badge Stamp */}
+              <div className="absolute top-4 left-4 z-20 w-32 sm:w-36">
+                <img
+                  src={brandAssets.blueBadge}
+                  alt="LawrenceMonroe"
+                  className="w-full h-auto object-contain drop-shadow-md"
+                />
               </div>
 
               {/* Inset Focus Tag */}

@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Lock, Sparkles, SlidersHorizontal } from 'lucide-react';
+import { ArrowUpRight, Lock, SlidersHorizontal } from 'lucide-react';
 import { RELEASED_PRODUCTS } from '../data/products';
-import { ARCHIVE_ITEMS } from '../data/archive';
 import { formatCurrency } from '../utils/format';
 import { useCartStore } from '../store/cartStore';
+import { brandAssets } from '../data/assets';
 
 export const ShopPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'ALL' | 'BLACK' | 'BONE' | 'AVAILABLE'>('ALL');
@@ -17,7 +17,7 @@ export const ShopPage: React.FC = () => {
     if (activeFilter === 'BLACK') {
       list = list.filter((p) => p.selectedColorDefault.toLowerCase().includes('black') || p.code.includes('BLK'));
     } else if (activeFilter === 'BONE') {
-      list = list.filter((p) => p.selectedColorDefault.toLowerCase().includes('bone') || p.code.includes('BNE'));
+      list = list.filter((p) => p.selectedColorDefault.toLowerCase().includes('grey') || p.code.includes('GRY') || p.code.includes('BNE'));
     } else if (activeFilter === 'AVAILABLE') {
       list = list.filter((p) => p.status === 'ACTIVE');
     }
@@ -51,7 +51,7 @@ export const ShopPage: React.FC = () => {
                 ACTIVE PIECES.
               </h1>
               <p className="font-utility text-xs sm:text-sm text-smoke max-w-lg">
-                Exclusive limited allocation. All shorts constructed from 480GSM French terry with custom hardware.
+                Exclusive limited allocation. All shorts constructed from 480GSM cotton with official insignia badges and raw hemline.
               </p>
             </div>
 
@@ -85,7 +85,7 @@ export const ShopPage: React.FC = () => {
                       : 'border-line bg-graphite/40 text-smoke hover:text-bone hover:border-smoke'
                   }`}
                 >
-                  {tab}
+                  {tab === 'BONE' ? 'HEATHER GREY' : tab}
                 </button>
               ))}
             </div>
@@ -109,75 +109,81 @@ export const ShopPage: React.FC = () => {
 
         {/* Released Products Grid: Editorial Asymmetry */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-24">
-          {filteredProducts.map((product, idx) => (
-            <div
-              key={product.id}
-              className="group bg-graphite/40 border border-line hover:border-gold transition-all duration-500 flex flex-col justify-between"
-            >
-              {/* Product Header Bar */}
-              <div className="p-4 border-b border-line flex items-center justify-between font-mono text-[10px]">
-                <span className="text-gold tracking-widest font-bold">
-                  SPEC: {product.code}
-                </span>
-                <span className="text-smoke bg-black/60 px-2 py-0.5 border border-line/40">
-                  {product.release}
-                </span>
-              </div>
+          {filteredProducts.map((product) => {
+            const isHeather = product.id === 'lm-shorts-002';
+            const badgeSrc = isHeather ? brandAssets.blueBadge : brandAssets.whiteBadge;
 
-              {/* Main Media Stage */}
-              <Link to={`/shop/${product.slug}`} className="block relative aspect-[4/5] bg-black overflow-hidden">
-                <img
-                  src={product.heroImage}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-95 contrast-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-
-                {/* Floating Gold Edition Stamp */}
-                <div className="absolute top-4 left-4">
-                  <div className="inline-flex items-center space-x-1.5 font-mono text-[9px] border border-gold bg-black/80 px-2 py-1 text-gold tracking-widest uppercase">
-                    <span className="w-1.5 h-1.5 bg-gold" />
-                    <span>{product.badge}</span>
-                  </div>
-                </div>
-
-                {/* Micro Detail Inset on Hover */}
-                <div className="absolute bottom-4 right-4 font-mono text-[10px] text-smoke bg-black/80 border border-line px-3 py-1.5 flex items-center space-x-1 group-hover:text-gold group-hover:border-gold transition-colors">
-                  <span>INSPECT SPEC</span>
-                  <ArrowUpRight size={13} />
-                </div>
-              </Link>
-
-              {/* Footer Product Details */}
-              <div className="p-6 bg-black/60 border-t border-line space-y-4">
-                <div className="flex items-baseline justify-between">
-                  <Link to={`/shop/${product.slug}`}>
-                    <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-bone group-hover:text-gold transition-colors uppercase tracking-tight">
-                      {product.name}
-                    </h2>
-                  </Link>
-                  <span className="font-mono text-lg sm:text-xl font-bold text-bone">
-                    {formatCurrency(product.price)}
+            return (
+              <div
+                key={product.id}
+                className="group bg-graphite/40 border border-line hover:border-gold transition-all duration-500 flex flex-col justify-between"
+              >
+                {/* Product Header Bar */}
+                <div className="p-4 border-b border-line flex items-center justify-between font-mono text-[10px]">
+                  <span className="text-gold tracking-widest font-bold">
+                    SPEC: {product.code}
+                  </span>
+                  <span className="text-smoke bg-black/60 px-2 py-0.5 border border-line/40">
+                    {product.release}
                   </span>
                 </div>
 
-                <p className="font-utility text-xs text-smoke leading-relaxed line-clamp-2">
-                  {product.shortDescription}
-                </p>
+                {/* Main Media Stage */}
+                <Link to={`/shop/${product.slug}`} className="block relative aspect-[4/5] bg-black overflow-hidden">
+                  <img
+                    src={product.heroImage}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-95 contrast-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
-                {/* CTA */}
-                <div className="pt-2">
-                  <Link
-                    to={`/shop/${product.slug}`}
-                    className="w-full bg-bone hover:bg-gold text-black py-3.5 px-6 font-mono text-xs font-bold tracking-widest uppercase transition-colors flex items-center justify-center space-x-2"
-                  >
-                    <span>VIEW DOSSIER & ORDER</span>
-                    <ArrowUpRight size={14} />
-                  </Link>
+                  {/* Official Pill Badge Stamp */}
+                  <div className="absolute top-4 left-4 z-20 w-32 sm:w-36">
+                    <img
+                      src={badgeSrc}
+                      alt="LawrenceMonroe"
+                      className="w-full h-auto object-contain drop-shadow-md"
+                    />
+                  </div>
+
+                  {/* Micro Detail Inset on Hover */}
+                  <div className="absolute bottom-4 right-4 font-mono text-[10px] text-smoke bg-black/80 border border-line px-3 py-1.5 flex items-center space-x-1 group-hover:text-gold group-hover:border-gold transition-colors">
+                    <span>INSPECT SPEC</span>
+                    <ArrowUpRight size={13} />
+                  </div>
+                </Link>
+
+                {/* Footer Product Details */}
+                <div className="p-6 bg-black/60 border-t border-line space-y-4">
+                  <div className="flex items-baseline justify-between">
+                    <Link to={`/shop/${product.slug}`}>
+                      <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-bone group-hover:text-gold transition-colors uppercase tracking-tight">
+                        {product.name}
+                      </h2>
+                    </Link>
+                    <span className="font-mono text-lg sm:text-xl font-bold text-bone">
+                      {formatCurrency(product.price)}
+                    </span>
+                  </div>
+
+                  <p className="font-utility text-xs text-smoke leading-relaxed line-clamp-2">
+                    {product.shortDescription}
+                  </p>
+
+                  {/* CTA */}
+                  <div className="pt-2">
+                    <Link
+                      to={`/shop/${product.slug}`}
+                      className="w-full bg-bone hover:bg-gold text-black py-3.5 px-6 font-mono text-xs font-bold tracking-widest uppercase transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <span>VIEW DOSSIER & ORDER</span>
+                      <ArrowUpRight size={14} />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Unreleased Concept Archive Teaser Section */}

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { brandAssets } from '../../data/assets';
 
 export const Section2Manifesto: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -9,8 +10,8 @@ export const Section2Manifesto: React.FC = () => {
     offset: ['start end', 'end start'],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-  const letterY = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+  const textY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const outlineShiftX = useTransform(scrollYProgress, [0, 1], ['5%', '-15%']);
   const stripX = useTransform(scrollYProgress, [0, 1], ['0%', '-25%']);
 
   return (
@@ -19,14 +20,16 @@ export const Section2Manifesto: React.FC = () => {
       ref={sectionRef}
       className="relative w-full bg-paper text-ink py-24 sm:py-32 md:py-40 overflow-hidden border-b border-ash/30"
     >
-      {/* Oversized background letterform running behind content */}
+      {/* Oversized Official Outline Wordmark running behind content */}
       <motion.div
-        style={{ y: letterY }}
-        className="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 pointer-events-none select-none z-0 opacity-10"
+        style={{ x: outlineShiftX }}
+        className="absolute top-1/3 left-0 w-[140vw] pointer-events-none select-none z-0 opacity-15"
       >
-        <span className="font-condensed font-extrabold text-[45vw] md:text-[50vw] leading-none text-ink tracking-tightest">
-          LM
-        </span>
+        <img
+          src={brandAssets.wordmarkOutline}
+          alt=""
+          className="w-full h-auto object-contain filter invert"
+        />
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 relative z-10">
@@ -74,12 +77,11 @@ export const Section2Manifesto: React.FC = () => {
           style={{ x: stripX }}
           className="flex space-x-6 w-[200vw] sm:w-[150vw] md:w-[130vw] select-none"
         >
-          {/* Repeatable strip elements */}
           {[
             { img: '/images/campaign-contact-fabric.jpg', tag: '480GSM WEAVE' },
             { img: '/images/campaign-contact-hardware.jpg', tag: 'ANTIQUE GOLD HARDWARE' },
-            { img: '/images/shorts-001-back.jpg', tag: 'YOKE GEOMETRY' },
-            { img: '/images/shorts-002-detail.jpg', tag: 'RAW PIGMENT FLECK' },
+            { img: '/images/shorts-001-back.jpg', tag: 'SEATED DRAPE' },
+            { img: '/images/shorts-002-detail.jpg', tag: 'RAW HEM DETAIL' },
             { img: '/images/campaign-contact-stride.jpg', tag: 'STRIDE PROPORTION' },
             { img: '/images/campaign-contact-fabric.jpg', tag: '480GSM WEAVE' },
             { img: '/images/campaign-contact-hardware.jpg', tag: 'ANTIQUE GOLD HARDWARE' },
