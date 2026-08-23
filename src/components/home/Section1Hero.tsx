@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { brandAssets } from '../../data/assets';
 import { EditorialFaceBlur } from '../common/EditorialFaceBlur';
+import { Wordmark } from '../common/BrandLogo';
 
 export const Section1Hero: React.FC = () => {
   const [isHoveredCTA, setIsHoveredCTA] = useState(false);
@@ -47,7 +48,7 @@ export const Section1Hero: React.FC = () => {
         <img src={brandAssets.monogram} alt="" className="w-full h-auto object-contain" />
       </div>
 
-      {/* Kinetic Layer 1: Real Campaign Silhouette in Studio with Fun Editorial Face Blur */}
+      {/* Kinetic Layer 1: Real Campaign Silhouette in Studio with Vintage Redaction Bar */}
       <motion.div
         style={{ x: bgShiftX }}
         className="absolute right-[-2%] sm:right-[4%] top-[12%] w-[68vw] sm:w-[45vw] md:w-[38vw] max-w-[480px] h-[55vh] max-h-[620px] pointer-events-none z-0 opacity-40 md:opacity-60 overflow-hidden border border-line"
@@ -58,7 +59,7 @@ export const Section1Hero: React.FC = () => {
             alt="Campaign silhouette in motion"
             className="w-full h-full object-cover grayscale contrast-125 brightness-90 filter"
           />
-          <EditorialFaceBlur top="16%" left="50%" width="72px" height="38px" label="LM // PRIVATE" />
+          <EditorialFaceBlur top="16%" left="50%" width="88px" height="30px" label="LAWRENCE MONROE" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
         <div className="absolute bottom-3 left-3 font-mono text-[9px] text-smoke/80 tracking-widest uppercase bg-black/60 px-2 py-0.5 border border-line/40">
@@ -77,8 +78,8 @@ export const Section1Hero: React.FC = () => {
             alt="LM Shorts 001 with signature vertical arch graphic"
             className="w-full h-auto object-contain"
           />
-          {/* Fun Editorial Face Blur on full look cutout */}
-          <EditorialFaceBlur top="7%" left="50%" width="84px" height="44px" label="LM // 001" />
+          {/* Vintage Redaction Bar on model's face */}
+          <EditorialFaceBlur top="7%" left="50%" width="96px" height="34px" label="LAWRENCE MONROE" />
         </div>
         {/* Archival Pin Label */}
         <div className="absolute top-[35%] right-[10%] bg-black/80 border border-gold/60 backdrop-blur-sm px-2.5 py-1 flex items-center space-x-1.5 shadow-xl">
@@ -102,7 +103,7 @@ export const Section1Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Center Display: Official LAWRENCE MONROE Wordmark Asset */}
+      {/* Center Display: Official LAWRENCE MONROE Wordmark */}
       <div className="max-w-7xl w-full mx-auto px-5 sm:px-8 md:px-12 relative z-20 my-auto py-12 md:py-20">
         <div className="space-y-6">
           <motion.div
@@ -111,11 +112,9 @@ export const Section1Hero: React.FC = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="w-full max-w-4xl"
           >
-            <img
-              src={brandAssets.wordmark}
-              alt="LAWRENCE MONROE"
-              className="w-full h-auto object-contain filter brightness-110 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
-            />
+            <h1 className="font-serif font-extrabold text-4xl sm:text-7xl md:text-8xl lg:text-9xl text-bone tracking-tight uppercase leading-none select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+              LAWRENCE MONROE
+            </h1>
           </motion.div>
 
           <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 pt-2">

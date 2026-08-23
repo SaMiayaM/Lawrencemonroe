@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '../../store/cartStore';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { brandAssets } from '../../data/assets';
+import { Wordmark, MonogramMark } from './BrandLogo';
 
 const MENU_ITEMS = [
   {
@@ -59,12 +60,10 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Handle escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -99,7 +98,7 @@ export const Navigation: React.FC = () => {
       <header
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
           isScrolled
-            ? 'bg-black/90 backdrop-blur-md border-b border-line py-3.5 shadow-2xl'
+            ? 'bg-black/95 backdrop-blur-md border-b border-line py-3.5 shadow-2xl'
             : 'bg-transparent py-6 md:py-8'
         }`}
       >
@@ -111,38 +110,23 @@ export const Navigation: React.FC = () => {
               className="group flex items-center space-x-2.5 focus:outline-none focus-visible:ring-1 focus-visible:ring-gold"
               aria-label="Lawrence Monroe Home"
             >
-              <div className="w-8 h-8 border border-line bg-graphite/40 group-hover:border-gold transition-colors duration-300 flex items-center justify-center p-1.5 relative overflow-hidden">
-                <img
-                  src={brandAssets.monogram}
-                  alt="LM Monogram"
-                  className="w-full h-full object-contain filter brightness-105"
-                />
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </div>
+              <MonogramMark className="w-8 h-8 group-hover:border-gold transition-colors" />
               <span className="hidden sm:inline-block font-mono text-[10px] text-smoke tracking-ultra">
                 [001]
               </span>
             </Link>
           </div>
 
-          {/* Center: Official LAWRENCE MONROE Wordmark Image */}
+          {/* Center: Official LAWRENCE MONROE Wordmark */}
           <div className="absolute left-1/2 -translate-x-1/2 text-center pointer-events-auto">
             <Link
               to="/"
               className="group inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             >
-              <div
-                className={`transition-all duration-300 ${
-                  isScrolled ? 'h-4 sm:h-5' : 'h-5 sm:h-7'
-                } flex items-center justify-center`}
-              >
-                <img
-                  src={brandAssets.wordmark}
-                  alt="LAWRENCE MONROE"
-                  className="h-full w-auto max-w-[240px] sm:max-w-[360px] object-contain filter brightness-105 group-hover:brightness-125 transition-all"
-                />
-              </div>
-              <div className="w-0 group-hover:w-full h-[1px] bg-gold mx-auto transition-all duration-300 mt-1" />
+              <Wordmark
+                className={isScrolled ? 'scale-90 transition-transform' : 'scale-100 transition-transform'}
+              />
+              <div className="w-0 group-hover:w-full h-[1px] bg-gold mx-auto transition-all duration-300 mt-0.5" />
             </Link>
           </div>
 
@@ -153,7 +137,7 @@ export const Navigation: React.FC = () => {
               className="hidden sm:inline-flex items-center space-x-1 font-mono text-xs text-smoke hover:text-bone tracking-widest uppercase transition-colors relative py-1 focus:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             >
               <span>SHOP</span>
-              <span className="text-gold text-[9px] font-mono">001</span>
+              <span className="text-gold text-[9px] font-mono font-bold">001</span>
             </Link>
 
             {/* Cart Button */}
@@ -198,8 +182,10 @@ export const Navigation: React.FC = () => {
             {/* Top Bar inside menu */}
             <div className="max-w-7xl w-full mx-auto px-5 sm:px-8 md:px-12 py-6 md:py-8 flex items-center justify-between border-b border-line">
               <div className="flex items-center space-x-3">
-                <img src={brandAssets.monogram} alt="LM" className="w-5 h-5 object-contain" />
-                <span className="font-mono text-xs tracking-widest text-gold">LM / ARCHIVE INDEX</span>
+                <MonogramMark className="w-6 h-6" />
+                <span className="font-mono text-xs tracking-widest text-gold font-bold">
+                  LM / ARCHIVE INDEX
+                </span>
               </div>
 
               <button
@@ -269,7 +255,7 @@ export const Navigation: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column: Visual Campaign Collage / Preview (Desktop only) */}
+              {/* Right Column: Visual Campaign Collage / Preview */}
               <div className="hidden lg:block lg:col-span-5 relative h-[380px] w-full border border-line bg-graphite overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
