@@ -41,7 +41,7 @@ export const brandAssets = {
 // LM SHORTS 001 (Pitch Black with White Arch Graphic & White Pill Badge)
 export const SHORTS_001_VISUALS: ProductVisual[] = [
   {
-    id: 'shorts-001-full',
+    id: 'lm-001-full-look',
     src: '/images/shorts-001-cutout.jpg',
     alt: 'LM Shorts 001 in Pitch Black with white distressed arch graphic shown on model in studio',
     productId: 'lm-shorts-001',
@@ -92,7 +92,7 @@ export const SHORTS_001_VISUALS: ProductVisual[] = [
     ],
   },
   {
-    id: 'shorts-001-alt-1',
+    id: 'lm-001-campaign-02',
     src: '/images/campaign-hero-motion.jpg',
     alt: 'LM Shorts 001 3/4 standing angle showing silhouette drape',
     productId: 'lm-shorts-001',
@@ -113,7 +113,7 @@ export const SHORTS_001_VISUALS: ProductVisual[] = [
     },
   },
   {
-    id: 'shorts-001-seated',
+    id: 'lm-001-seated-study',
     src: '/images/shorts-001-back.jpg',
     alt: 'LM Shorts 001 seated study in studio chair',
     productId: 'lm-shorts-001',
@@ -138,7 +138,7 @@ export const SHORTS_001_VISUALS: ProductVisual[] = [
 // LM SHORTS 002 (Heather Grey with Electric Blue Graphic & Blue Pill Badge)
 export const SHORTS_002_VISUALS: ProductVisual[] = [
   {
-    id: 'shorts-002-full',
+    id: 'lm-002-full-look',
     src: '/images/shorts-002-cutout.jpg',
     alt: 'LM Shorts 002 in Heather Grey with electric blue Lawrence arch graphic shown on model in studio',
     productId: 'lm-shorts-002',
@@ -189,7 +189,7 @@ export const SHORTS_002_VISUALS: ProductVisual[] = [
     ],
   },
   {
-    id: 'shorts-002-alt-1',
+    id: 'lm-002-campaign-02',
     src: '/images/campaign-contact-stride.jpg',
     alt: 'LM Shorts 002 3/4 standing view showing blue graphic and drape',
     productId: 'lm-shorts-002',
