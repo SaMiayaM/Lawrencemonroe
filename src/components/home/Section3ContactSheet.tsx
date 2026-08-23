@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Maximize2, Lock, ArrowRight, ArrowLeft } from 'lucide-react';
 import { CONTACT_FRAMES } from '../../data/contactFrames';
 import { useCartStore } from '../../store/cartStore';
+import { EditorialFaceBlur } from '../common/EditorialFaceBlur';
 
 export const Section3ContactSheet: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,7 +50,7 @@ export const Section3ContactSheet: React.FC = () => {
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 bg-gold inline-block" />
-              <span className="font-mono text-xs text-gold tracking-widest uppercase">
+              <span className="font-mono text-xs text-gold tracking-widest uppercase font-bold">
                 CONTACT SHEET TELEMETRY
               </span>
             </div>
@@ -91,6 +92,7 @@ export const Section3ContactSheet: React.FC = () => {
         >
           {CONTACT_FRAMES.map((frame, index) => {
             const isHovered = activeHoverId === frame.id;
+            const isModelShot = frame.id === 'frame-01' || frame.id === 'frame-02' || frame.id === 'frame-03' || frame.id === 'frame-04';
 
             return (
               <div
@@ -111,7 +113,7 @@ export const Section3ContactSheet: React.FC = () => {
                 </div>
 
                 {/* Main Visual Image */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-black">
+                <div className="relative aspect-[4/5] overflow-hidden bg-black flex items-center justify-center p-2">
                   <img
                     src={frame.image}
                     alt={frame.title}
@@ -119,6 +121,17 @@ export const Section3ContactSheet: React.FC = () => {
                       isHovered ? 'scale-105 contrast-110 grayscale-0' : 'grayscale contrast-115 brightness-90'
                     }`}
                   />
+
+                  {/* Vintage Redaction Bar over Model Face */}
+                  {isModelShot && (
+                    <EditorialFaceBlur
+                      top="12%"
+                      left="50%"
+                      width="76px"
+                      height="26px"
+                      label="LM // [001]"
+                    />
+                  )}
 
                   {/* Dark Vignette Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
@@ -166,7 +179,7 @@ export const Section3ContactSheet: React.FC = () => {
       {/* Frame Counter / Pagination Bar */}
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 mt-8 flex items-center justify-between font-mono text-xs text-smoke">
         <div>TOTAL SPECIMENS: {CONTACT_FRAMES.length} FRAMES</div>
-        <div className="text-gold tracking-widest uppercase">
+        <div className="text-gold tracking-widest uppercase font-bold">
           CLICK FRAME TO INSPECT
         </div>
       </div>

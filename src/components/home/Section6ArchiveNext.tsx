@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Lock, ArrowUpRight, Eye } from 'lucide-react';
 import { ARCHIVE_ITEMS } from '../../data/archive';
 import { useCartStore } from '../../store/cartStore';
+import { brandAssets } from '../../data/assets';
 
 export const Section6ArchiveNext: React.FC = () => {
   const [hoveredArchiveId, setHoveredArchiveId] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export const Section6ArchiveNext: React.FC = () => {
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 bg-archive-red inline-block" />
               <span className="font-mono text-xs text-archive-red tracking-widest uppercase font-bold">
-                ARCHIVE NEXT / EXPERIMENTAL LAB
+                ARCHIVE NEXT / UNRELEASED RESEARCH
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-bone uppercase">
@@ -33,7 +33,7 @@ export const Section6ArchiveNext: React.FC = () => {
 
           <div className="font-mono text-xs text-smoke text-left sm:text-right space-y-1">
             <div>PROTOTYPE SPECIMENS IN DEVELOPMENT</div>
-            <div className="text-gold uppercase tracking-wider">RESTRICTED TO ENROLLED CLIENTS</div>
+            <div className="text-gold uppercase tracking-wider font-bold">RESTRICTED TO ENROLLED CLIENTS</div>
           </div>
         </div>
 
@@ -41,6 +41,7 @@ export const Section6ArchiveNext: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {ARCHIVE_ITEMS.map((item) => {
             const isHovered = hoveredArchiveId === item.id;
+            const isCap = item.category === 'HEADWEAR';
 
             return (
               <div
@@ -62,7 +63,7 @@ export const Section6ArchiveNext: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Masked / Photocopy Graphic Specimen Stage */}
+                {/* Specimen Stage */}
                 <div className="relative aspect-[4/3] bg-graphite/40 border border-line/40 overflow-hidden mb-6 flex items-center justify-center">
                   <img
                     src={item.image}
@@ -72,12 +73,19 @@ export const Section6ArchiveNext: React.FC = () => {
                     }`}
                   />
 
+                  {/* Top Insignia Stamp */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <div className="border border-gold/60 bg-black/80 px-2.5 py-1 font-mono text-[9px] text-gold uppercase tracking-widest">
+                      {isCap ? 'HEADWEAR 003' : 'BOXY TEE 002'}
+                    </div>
+                  </div>
+
                   {/* Cut-paper Halftone & Vignette Mask */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
                   {/* Center Watermark Stamp */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="border border-line/80 bg-black/80 px-4 py-2 rotate-[-6deg] backdrop-blur-sm">
+                    <div className="border border-line/80 bg-black/80 px-4 py-2 rotate-[-6deg] backdrop-blur-sm shadow-2xl">
                       <span className="font-mono text-[11px] font-bold text-bone tracking-ultra uppercase">
                         NOT YET RELEASED
                       </span>
@@ -93,7 +101,7 @@ export const Section6ArchiveNext: React.FC = () => {
                 {/* Specimen Info */}
                 <div className="space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <div className="font-mono text-xs text-gold uppercase tracking-wider">
+                    <div className="font-mono text-xs text-gold uppercase tracking-wider font-bold">
                       {item.category} / UNRELEASED
                     </div>
                     <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-bone group-hover:text-gold transition-colors uppercase">
