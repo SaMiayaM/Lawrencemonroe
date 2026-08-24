@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" fill="none">
+  <rect x="4" y="4" width="152" height="42" rx="21" stroke="#E7E1D7" stroke-width="3" />
+  <text 
+    x="80" 
+    y="30" 
+    text-anchor="middle" 
+    fill="#E7E1D7" 
+    font-family="'Space Grotesk', sans-serif" 
+    font-size="14" 
+    font-weight="700" 
+    letter-spacing="1"
+  >LawrenceMonroe</text>
+</svg>

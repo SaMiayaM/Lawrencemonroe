@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 450" fill="none">
+  <!-- Signature Arch Pill Frame in Electric Cobalt Blue -->
+  <rect x="15" y="15" width="170" height="420" rx="85" stroke="#0088FF" stroke-width="12" stroke-dasharray="1400" stroke-dashoffset="0" opacity="0.95" />
+  <!-- Vertical "Lawrence" typography in Electric Blue -->
+  <g transform="translate(100, 240) rotate(-90)">
+    <text 
+      x="0" 
+      y="18" 
+      text-anchor="middle" 
+      fill="#0088FF" 
+      font-family="'Space Grotesk', 'Anton', sans-serif" 
+      font-size="64" 
+      font-weight="800" 
+      letter-spacing="4"
+    >Lawrence</text>
+  </g>
+</svg>

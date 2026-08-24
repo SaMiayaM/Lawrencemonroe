@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0A0A0A;
+  --black: #050505;
+  --graphite: #171717;
+  --ash: #303030;
+  --bone: #E7E1D7;
+  --paper: #F1ECE3;
+  --smoke: #9A958D;
+  --line: rgba(231, 225, 215, 0.17);
+  --line-dark: rgba(10, 10, 10, 0.12);
+
+  --gold: #AD8A48;
+  --gold-soft: #C4A565;
+  --gold-dark: #60471E;
+
+  --archive-red: #743530;
+  --silver: #A6A6A2;
+}
+
+@layer base {
+  body {
+    background-color: var(--black);
+    color: var(--bone);
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::selection {
+    background-color: var(--gold);
+    color: var(--black);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #303030;
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #AD8A48;
+  }
+}
+
+/* Custom typography & display utilities */
+.font-display-massive {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.font-editorial {
+  font-family: 'Cormorant Garamond', 'Italiana', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.font-utility {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-archive-code {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Contact sheet border styling */
+.contact-frame-border {
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+.contact-frame-border::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+
+.contact-frame-border::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+}
+
+/* Gold fine line accent animations */
+.gold-line-sweep {
+  position: relative;
+}
+.gold-line-sweep::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--gold);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gold-line-sweep:hover::after {
+  width: 100%;
+}
+
+/* Subtle grid backdrop */
+.bg-archival-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(231, 225, 215, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(231, 225, 215, 0.03) 1px, transparent 1px);
+}
+
+/* Reduced motion rules */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
